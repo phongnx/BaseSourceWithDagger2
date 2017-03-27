@@ -4,14 +4,9 @@ import android.content.Context;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
-import android.view.View;
 
 import com.base.baseproject.R;
 import com.base.baseproject.ui.base.BaseActivity;
@@ -92,17 +87,11 @@ public class MainActivity extends BaseActivity implements MainMvpView {
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        int grantResult = 0;
-        try {
-            grantResult = grantResults[0];
-        } catch (Exception e) {
-            Log.e(getClass().getSimpleName(), String.valueOf(e));
-        }
         switch (requestCode) {
             case REQUEST_CODE_GRANT_STORAGE_PERMISSIONS:
-                if (grantResult == PackageManager.PERMISSION_GRANTED) {
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     // Permission Granted
-                    mainPresenter.initData();
+//                    mainPresenter.initData();
                 } else {
                     // Permission Denied
                     Utils.showToast(context, getApplicationContext().getString(R.string.lbl_alert_storage_permission_denied));

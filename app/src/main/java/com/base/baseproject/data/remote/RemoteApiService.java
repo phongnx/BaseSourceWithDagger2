@@ -9,10 +9,9 @@ import java.util.concurrent.TimeUnit;
 import io.reactivex.Observable;
 import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
-import okhttp3.ResponseBody;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
-import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
@@ -28,9 +27,9 @@ public interface RemoteApiService {
 
     @FormUrlEncoded
     @POST("user/login")
-    Observable<ResponseBody> login(@Field("email") String email,
-                                   @Field("password") String password,
-                                   @Field("android_push_key") String android_push_key);
+    Observable<User> login(@Field("email") String email,
+                           @Field("password") String password,
+                           @Field("android_push_key") String android_push_key);
 
     @FormUrlEncoded
     @Multipart
@@ -60,7 +59,7 @@ public interface RemoteApiService {
             return new Retrofit.Builder()
                     .baseUrl(ENDPOINT)
                     .addConverterFactory(GsonConverterFactory.create(gson))
-                    .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                    .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                     .client(client)
                     .build();
 

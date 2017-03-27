@@ -15,7 +15,6 @@ import io.reactivex.Observable;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
-import okhttp3.ResponseBody;
 
 /**
  * Created by Phong on 11/9/2016.
@@ -34,7 +33,7 @@ public class DataManager {
         this.realmHelper = realmHelper;
     }
 
-    public Observable<ResponseBody> login(String email, String password, String android_push_key) {
+    public Observable<User> login(String email, String password, String android_push_key) {
         return remoteApiService.login(email, password, android_push_key);
     }
 
